@@ -64,8 +64,8 @@ Struct Server
 		log.Fatal(err)
 	}
 
-}
-func Run(hadler handler.Handler, router *gin.Engine) {
+	}
+	func Run(hadler handler.Handler, router *gin.Engine) {
 
 	router.Static("/static", "./static/")
 
