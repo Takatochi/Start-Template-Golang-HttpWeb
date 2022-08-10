@@ -63,6 +63,7 @@ initialization of templates, path and route addressing.
 
 /Ua/
 ініціалізація шаблонів, шляху та адресація маршрута.
+
 	func main() {
 	router := gin.New()
 	g := handler.InitHandler(router)
@@ -101,6 +102,7 @@ initialization of templates, path and route addressing.
 package hadler,the underhood part of the routing, functionality, redirection of the get route
 
 /Ua/
+
 пакет hadler, підкапотна частина маршрутизації, функціональності, переадресації get маршруту
 
   package handler
