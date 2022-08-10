@@ -2,32 +2,39 @@
 package main
 
 import (
+	"html/template"
 	"log"
-	"net/http"
-	"www/server"
+	"project/handler"
+	"project/server"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	router := gin.New()
+	g := handler.InitHandler(router)
 
-	if err := run(); err != nil {
+	srv := new(server.Server)
+	Run(*g, router)
+
+	if err := srv.Run("8088", router); err != nil {
 		log.Fatal(err)
 	}
 
 }
-func run() error {
+func Run(hadler handler.Handler, router *gin.Engine) {
 
-	start := server.Server{}
+	router.Static("/static", "./static/")
 
-	// візміть за увагу що шлях до стилів то що повний шлях в писаний в лінці як: /static/css/main.css
-	start.Prefix("/static/", "/content/")
+	router.SetFuncMap(template.FuncMap{
+		"whole": hadler.Index.Whole,
+	})
 
-	//метод RequestTemplate примаэ 3 параметра попарятку це назва темплйету, роутінг для запита сторінки, прямий шлях до hmtl шаблонів які ви використовуєте в темлейті
-	start.RequestTemplate("index", "/", "templates/index.html", "templates/header.html", "templates/footer.html")
-	start.RequestTemplate("contact", "/contact/", "templates/contact.html", "templates/header_contact.html", "templates/footer.html")
+	router.LoadHTMLGlob("templates/*.html")
 
-	if err := http.ListenAndServe(":8088", nil); err != nil {
-		return err
-	}
-
-	return nil
+	r(&hadler.Index, 2, router)
+	hadler.Contact.Routing(2, "contact", "/contact/", router)
+}
+func r(g handler.Routined, result any, router *gin.Engine) {
+	g.Routing(result, "index", "/", router)
 }
