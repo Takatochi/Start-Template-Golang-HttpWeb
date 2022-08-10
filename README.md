@@ -99,13 +99,14 @@ initialization of templates, path and route addressing.
 
 /En/
 
-package hadler,the underhood part of the routing, functionality, redirection of the get route
+package handler,the underhood part of the routing, functionality, redirection of the get route
 
 /Ua/
 
-пакет hadler, підкапотна частина маршрутизації, функціональності, переадресації get маршруту
+пакет handler, підкапотна частина маршрутизації, функціональності, переадресації get маршруту
 
-  package handler
+
+ 	package handler
 
 	import (
 	
