@@ -57,10 +57,8 @@ func Run(hadler *handler.Handler, router *gin.Engine) error {
 
 	router.LoadHTMLGlob("templates/*.html")
 
-	result := []map[string]any{}
-
-	r(&hadler.Index, result, router)
-	hadler.Contact.Routing(result, "contact", "/contact/", router)
+	r(&hadler.Index, 2, router)
+	hadler.Contact.Routing(2, "contact", "/contact/", router)
 
 	return nil
 }
