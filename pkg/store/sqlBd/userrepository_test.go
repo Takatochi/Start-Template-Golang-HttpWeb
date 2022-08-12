@@ -11,7 +11,7 @@ import (
 
 func TestUserRepository_Create(t *testing.T) {
 	db, teardown := sqlBd.TestDB(t, databaseURL)
-	defer teardown("users")
+	defer teardown("user")
 
 	s := sqlBd.New(db)
 	u := model.TestUser(t)
