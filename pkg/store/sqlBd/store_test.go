@@ -15,5 +15,5 @@ func TestMain(m *testing.M) {
 		databaseURL = "root:@tcp(127.0.0.1:3306)/golang"
 	}
 
-	os.Exit(m.Run())
+	m.Run()
 }
