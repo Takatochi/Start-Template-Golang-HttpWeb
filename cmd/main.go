@@ -2,10 +2,10 @@ package main
 
 import (
 	"flag"
-	"log"
-	"project/pkg/server"
-
 	"github.com/BurntSushi/toml"
+	"log"
+	"project/app"
+	srv "project/app/server"
 )
 
 var (
@@ -17,26 +17,17 @@ func init() {
 }
 
 func main() {
-	//server
-	srv := new(server.Server)
+	//server ...
 
 	flag.Parse()
 
-	// g := handler.NewHandler()
-	// routers := g.Routing()
-
-	config := server.NewConfig()
+	config := srv.NewConfig()
 	_, err := toml.DecodeFile(configPath, config)
+
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// if err := Run(g, routers); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	if err := srv.Run(config); err != nil {
-		log.Fatal(err)
-	}
+	app.Run(config)
 
 }

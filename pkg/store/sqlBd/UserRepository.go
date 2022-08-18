@@ -2,7 +2,7 @@ package sqlBd
 
 import (
 	"database/sql"
-	"project/pkg/model"
+	"project/app/model"
 	"project/pkg/store"
 )
 
